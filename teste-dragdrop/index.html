@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Teste drag and drop</title>
+    <style>
+      .container {
+        display: flex;
+        gap: 30px;
+      }
+      .box {
+        height: auto;
+        padding: 15px;
+        width: 300px;
+        border: 1px solid black;
+      }
+      .box .draggable {
+        padding: 5px;
+        border: 1px solid black;
+      }
+      .box .draggable.dragging {
+        background-color: aquamarine;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="todo box">
+        <h2>to-do</h2>
+        <p class="draggable" draggable="true">teste a fazer</p>
+        <p class="draggable" draggable="true">teste a fazer</p>
+      </div>
+      <div class="inprogress box">
+        <h2>in progress</h2>
+        <p class="draggable" draggable="true">teste progresso</p>
+        <p class="draggable" draggable="true">teste progresso</p>
+      </div>
+      <div class="done box">
+        <h2>done</h2>
+        <p class="draggable" draggable="true">teste feito</p>
+        <p class="draggable" draggable="true">teste feito</p>
+      </div>
+    </div>
+    <script>
+      const draggables = document.querySelectorAll('.draggable')
+      const boxes = document.querySelectorAll('.box')
+
+      draggables.forEach((eachDraggable) => {
+        //drag behaviour
+        eachDraggable.addEventListener('dragstart', () => {
+          console.log('drag start')
+          eachDraggable.classList.add('dragging')
+        })
+        eachDraggable.addEventListener('dragend', () => {
+          console.log('drag end')
+          eachDraggable.classList.remove('dragging')
+        })
+      })
+
+      boxes.forEach((eachBox) => {
+        eachBox.addEventListener('dragover', (e) => {
+          e.preventDefault
+          console.log('dragging over')
+          const dragging = document.querySelector('.dragging')
+          eachBox.appendChild(dragging)
+        })
+      })
+    </script>
+  </body>
+</html>
